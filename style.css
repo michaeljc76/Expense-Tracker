@@ -1,7 +1,17 @@
+:root{
+    bg-color: #ffffff;
+    text-color: #000000;
+    main-color:#3a3dbe;
+}
+
 *{
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 body{
+    padding:2rem;
     font-family: system-ui;
+    background-color: var(bg-color);
 }
