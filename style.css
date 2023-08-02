@@ -57,8 +57,8 @@ header{
     font-size: 1rem;
     font-weight: 600;
     font-family: system-ui;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 main{
@@ -82,8 +82,18 @@ form input{
     border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 8px;
-
 }
+
+button{
+    width: 100%;
+    border: 1px transparent var(--head-color);
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: var(--bg-color);
+    border-radius: 5px;
+}
+
 
 form div:first-child{
     flex-basis: 100%
@@ -91,4 +101,17 @@ form div:first-child{
 
 form div:nth-child(n+2){
     flex-basis: calc(50% - 5px);
+}
+
+ul{
+    list-style-type: none;
+}
+
+#status {
+    text-align: center;
+
+}
+
+input{
+    font-size: 1rem;
 }
