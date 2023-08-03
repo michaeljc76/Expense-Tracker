@@ -7,20 +7,23 @@ const TRANSACTIONS = [
 		type: 'earned'
 	},
 	{
-		id: 1,
+		id: 2,
 		name: 'tv',
 		amount: 500,
 		date: new Date(),
 		type: 'expense'
 	},
 	{
-		id: 1,
+		id: 3,
 		name: 'new car',
 		amount: 5000,
 		date: new Date(),
 		type: 'expense'
 	},
 ];
+
+const options = {style: 'currency', currency: 'USD', signDisplay: 'always'};
+const formatter = new Intl.NumberFormat('en-US', options);
 
 const LIST = document.getElementById('list');
 const STATUS = document.getElementById('status')
@@ -33,11 +36,32 @@ function renderList(){
 		return;
 	}
 
-	TRANSACTIONS.forEach((transaction) =>{
+	TRANSACTIONS.forEach(({id, name, date, amount, type}) =>{
 		const li = document.createElement('li');
-		li.innerHTML = transaction.name + ' ' + transaction.date + ' ' + transaction.amount;
+
+		li.innerHTML = `
+		<div class="namedate">
+			<h2>${name}</h2>
+			<p>${date.toLocaleDateString()}</p>
+		</div>
+		<div class="amount ${type}">
+			<span>${formatter.format(amount)}</span>
+		</div>
+		<div class="action">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" onclick="deleteTransaction(${id})">
+	  		<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+			</svg>
+		</div>
+		`;
+
 		list.appendChild(li);
 	})
 }
 
 renderList();
+
+function deleteTransaction(id){
+	const index = TRANSACTIONS.findIndex(transaction => transaction.id === id);
+	TRANSACTIONS.splice(index, 1)
+	renderList();
+}

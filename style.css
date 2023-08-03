@@ -2,6 +2,7 @@
     --bg-color: #f3f3f3;
     --text-color: #000000;
     --head-color: #ff7f7f;
+    --hover-color: rgba(10, 10, 10, 0.1);
     font-size: 16px;
 }
 
@@ -94,6 +95,10 @@ button{
     border-radius: 5px;
 }
 
+button:hover{
+    background-color: var(--hover-color);
+}
+
 
 form div:first-child{
     flex-basis: 100%
@@ -107,6 +112,21 @@ ul{
     list-style-type: none;
 }
 
+ul li{
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    background-color: var(--bg-color);
+    padding: 0.5rem;
+    border: 1rem;
+    border-radius: 0.5rem;
+}
+
+ul li:hover{
+    background-color: var(--hover-color);
+
+}
+
 #status {
     text-align: center;
 
@@ -114,4 +134,52 @@ ul{
 
 input{
     font-size: 1rem;
+}
+
+.namedate{
+    flex: 1;
+}
+
+.namedate h2{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.namedate p{
+    font-size: 0.8rem;
+}
+
+.amount{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.amount.earned{
+    color: limegreen;
+}
+
+.amount.expense{
+    color: var(--head-color);
+}
+
+.action{
+    background-color: var(--head-color);
+    color: white;
+    width: 2rem;
+    height: 2ren;
+    margin-left: 0.5rem;
+    display: grid;
+    place-items: center;
+    transform: scale(0, 0);
+    transition: all 100ms;
+}
+
+ul li:hover .action{
+    transform: scale(1, 0.8);
+}
+
+.action svg{
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
 }
