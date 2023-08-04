@@ -23,7 +23,10 @@ const TRANSACTIONS = [
 ];
 
 const options = {style: 'currency', currency: 'USD', signDisplay: 'always'};
+const form = document.getElementById("transactionForm")
 const formatter = new Intl.NumberFormat('en-US', options);
+
+form.addEventListener('submit,', addTransaction);
 
 const LIST = document.getElementById('list');
 const STATUS = document.getElementById('status')
@@ -64,4 +67,8 @@ function deleteTransaction(id){
 	const index = TRANSACTIONS.findIndex(transaction => transaction.id === id);
 	TRANSACTIONS.splice(index, 1)
 	renderList();
+}
+
+function addTransaction(trx){
+	const formData = new FormData(this);
 }
