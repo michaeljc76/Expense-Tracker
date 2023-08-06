@@ -23,13 +23,13 @@ const TRANSACTIONS = [
 ];
 
 const options = {style: 'currency', currency: 'USD', signDisplay: 'always'};
-const form = document.getElementById("transactionForm")
+const form = document.getElementById("transactionForm");
 const formatter = new Intl.NumberFormat('en-US', options);
 
-form.addEventListener('submit,', addTransaction);
+form.addEventListener('submit', addTransaction);
 
 const LIST = document.getElementById('list');
-const STATUS = document.getElementById('status')
+const STATUS = document.getElementById('status');
 
 function renderList(){
 	LIST.innerHTML = '';
@@ -65,10 +65,23 @@ renderList();
 
 function deleteTransaction(id){
 	const index = TRANSACTIONS.findIndex(transaction => transaction.id === id);
-	TRANSACTIONS.splice(index, 1)
+	TRANSACTIONS.splice(index, 1);
 	renderList();
 }
 
 function addTransaction(trx){
+	trx.preventDefault();
+
 	const formData = new FormData(this);
+
+	TRANSACTIONS.push({
+		id: TRANSACTIONS.length + 1,
+		name: formData.get('name'),
+		amount: parseFloat(formData.get('amount')),
+		date: new Date(formData.get('date'))
+		//type: formData.get('type')
+	});
+
+	this.reset();
+	renderList();
 }

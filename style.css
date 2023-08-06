@@ -76,13 +76,57 @@ form{
     gap: 10px;
 }
 
-form input{
+form input:not(#type){
     width: 100%;
-    padding: 8px;
+    padding: 0.2rem;
     border: 1px solid var(--bg-color);
     border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 8px;
+}
+
+input#type{
+    appearance: none;
+    position: absolute;
+}
+
+.options{
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    padding: 0.2rem;
+    position: relative;
+    background-color: var(--bg-color);
+}
+
+.options span{
+    width: 49%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.options::before{
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    left: 0.6rem;
+    background-color: #FFFFFF;
+    height: calc(100% - 1rem);
+    width: calc(49% - 1rem);
+    /*transform: translateX(5px);*/
+    border-radius: 5px;
+    box-shadow: 2px 2px 0px black;
+    transition: all 200ms;
+}
+
+input#type:checked ~ .options::before{
+    left: 52%;
 }
 
 button{

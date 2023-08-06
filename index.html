@@ -31,6 +31,15 @@
             <header>Add Transaction</header>
             <form id="transactionForm">
                 <div>
+                    <label for="type">
+                        <input type="checkbox" name='type' id='type' required />
+                        <div class="options">
+                            <span>EXPENSE</span>
+                            <span>EARNED</span>
+                        </div>
+                    </label>
+                </div>
+                <div>
                     <label for="name">Name</label>
                     <input type ="text" name="name" required />
                 </div>
