@@ -1,35 +1,28 @@
-const TRANSACTIONS = [
-	{
-		id: 1,
-		name: 'salary',
-		amount: 35000,
-		date: new Date(),
-		type: 'earned'
-	},
-	{
-		id: 2,
-		name: 'tv',
-		amount: 500,
-		date: new Date(),
-		type: 'expense'
-	},
-	{
-		id: 3,
-		name: 'new car',
-		amount: 5000,
-		date: new Date(),
-		type: 'expense'
-	},
-];
+const TRANSACTIONS = JSON.parse(localStorage.getItem('TRANSACTIONS')) || [];
 
 const options = {style: 'currency', currency: 'USD', signDisplay: 'always'};
 const form = document.getElementById("transactionForm");
 const formatter = new Intl.NumberFormat('en-US', options);
+const balance = document.getElementById("balance");
+const earned = document.getElementById("earned");
+const expended = document.getElementById("expended");
 
 form.addEventListener('submit', addTransaction);
 
 const LIST = document.getElementById('list');
 const STATUS = document.getElementById('status');
+
+function updateh3(){
+	const incomeTotal = TRANSACTIONS.filter(trx => trx.type === 'earned')
+	.reduce((total, trx) => total + trx.amount, 0);
+	const expenseTotal = TRANSACTIONS.filter(trx => trx.type === 'expense')
+	.reduce((total, trx) => total + trx.amount, 0);
+	const total = (incomeTotal + expenseTotal);
+
+	earned.textContent = formatter.format(incomeTotal);
+	expended.textContent = formatter.format(expenseTotal);
+	balance.textContent = (total >= 0) ? formatter.format(total).substring(1) : formatter.format(total);
+}
 
 function renderList(){
 	LIST.innerHTML = '';
@@ -38,6 +31,9 @@ function renderList(){
 		STATUS.textContent = "No Transactions.";
 		return;
 	}
+	else{
+		STATUS.textContent = "";
+	}
 
 	TRANSACTIONS.forEach(({id, name, date, amount, type}) =>{
 		const li = document.createElement('li');
@@ -45,7 +41,7 @@ function renderList(){
 		li.innerHTML = `
 		<div class="namedate">
 			<h2>${name}</h2>
-			<p>${date.toLocaleDateString()}</p>
+			<p>${new Date(date).toLocaleDateString()}</p>
 		</div>
 		<div class="amount ${type}">
 			<span>${formatter.format(amount)}</span>
@@ -62,11 +58,15 @@ function renderList(){
 }
 
 renderList();
+updateh3();
+sortTransactions();
 
 function deleteTransaction(id){
 	const index = TRANSACTIONS.findIndex(transaction => transaction.id === id);
 	TRANSACTIONS.splice(index, 1);
 	renderList();
+	updateh3();
+	sortTransactions();
 }
 
 function addTransaction(trx){
@@ -77,11 +77,19 @@ function addTransaction(trx){
 	TRANSACTIONS.push({
 		id: TRANSACTIONS.length + 1,
 		name: formData.get('name'),
-		amount: parseFloat(formData.get('amount')),
+		amount: formData.get("type") ? parseFloat(formData.get('amount')) : -parseFloat(formData.get('amount')),
 		date: new Date(formData.get('date')),
-		type: "on" === formData.get("type") ? "earned" : "expense",
+		type: formData.get("type") ? "earned" : "expense",
 	});
 
 	this.reset();
 	renderList();
+	updateh3();
+	sortTransactions();
+}
+
+function sortTransactions(){
+	TRANSACTIONS.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+	localStorage.setItem("TRANSACTIONS", JSON.stringify(TRANSACTIONS));
 }
