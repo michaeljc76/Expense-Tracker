@@ -78,8 +78,8 @@ function addTransaction(trx){
 		id: TRANSACTIONS.length + 1,
 		name: formData.get('name'),
 		amount: parseFloat(formData.get('amount')),
-		date: new Date(formData.get('date'))
-		//type: formData.get('type')
+		date: new Date(formData.get('date')),
+		type: "on" === formData.get("type") ? "earned" : "expense",
 	});
 
 	this.reset();
