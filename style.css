@@ -229,3 +229,28 @@ ul li:hover .action{
     height: 2rem;
     cursor: pointer;
 }
+
+.back{
+    position: fixed;
+    height: 4rem;
+    width: 8rem;
+    background-color: #0e0e0e;
+    box-shadow: 5px 10px var(--head-color);
+    border: 0.25rem solid var(--head-color);
+    bottom: 1.5rem;
+    left: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back:hover{
+    background-color: var(--hover-color);
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
