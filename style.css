@@ -232,14 +232,12 @@ ul li:hover .action{
 
 .back{
     position: fixed;
-    height: 4rem;
-    width: 8rem;
+    height: 2rem;
+    width: 12rem;
     background-color: #0e0e0e;
-    box-shadow: 5px 10px var(--head-color);
-    border: 0.25rem solid var(--head-color);
     bottom: 1.5rem;
     left: 1.5rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 600;
     display: flex;
     justify-content: center;
@@ -247,6 +245,24 @@ ul li:hover .action{
 }
 
 .back:hover{
+    background-color: var(--hover-color);
+}
+
+.forward{
+    position: fixed;
+    height: 2rem;
+    width: 12rem;
+    background-color: #0e0e0e;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.forward:hover{
     background-color: var(--hover-color);
 }
 
