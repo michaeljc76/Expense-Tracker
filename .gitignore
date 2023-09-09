@@ -13,3 +13,7 @@ bower_components
 psd
 thumb
 sketch
+
+### readme ###
+*.readme.md
+*.README.md
